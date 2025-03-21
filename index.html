@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Projects Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #111111;
+            --secondary: #1a1a1a;
+            --accent: #b30000;
+            --accent-hover: #8b0000;
+            --text: #f0f0f0;
+            --text-muted: #aaaaaa;
+            --border: #333333;
+            --card: #1e1e1e;
+            --radius: 8px;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --transition: all 0.2s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--primary);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        header {
+            padding: 6rem 0 3rem;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .accent-bar {
+            height: 3px;
+            width: 60px;
+            background-color: var(--accent);
+            margin: 0 auto 1.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+        
+        section > p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-card {
+            background-color: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .card-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.25rem;
+        }
+        
+        .card-header small {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .project-meta {
+            display: flex;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .project-meta div {
+            margin-right: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .project-meta i {
+            margin-right: 0.5rem;
+            opacity: 0.7;
+        }
+        
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(179, 0, 0, 0.1);
+            color: var(--text);
+            padding: 0.35rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .tag.visual::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .card-footer {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid var(--border);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1.25rem;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        .highlight-section {
+            background-color: var(--card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .highlight-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        
+        .highlight-section p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .highlight-section ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .highlight-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .col-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            padding: 3rem 0;
+            margin-top: 3rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+        }
+        
+        /* Project Detail Modal */
+        .project-detail {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            overflow-y: auto;
+            backdrop-filter: blur(3px);
+        }
+        
+        .project-detail-content {
+            background-color: var(--card);
+            max-width: 900px;
+            margin: 3rem auto;
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .project-detail-header {
+            background-color: var(--secondary);
+            padding: 2.5rem 2rem 1.5rem;
+            position: relative;
+        }
+        
+        .project-detail-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        
+        .project-detail-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+        
+        .project-detail-body {
+            padding: 0;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background-color: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 10;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .close-btn:hover {
+            color: var(--text);
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background-color: var(--secondary);
+            overflow-x: auto;
+            padding: 0 2rem;
+        }
+        
+        .tab {
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition);
+            font-size: 0.9rem;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab:hover {
+            color: var(--text);
+        }
+        
+        .tab.active {
+            color: var(--text);
+            border-bottom-color: var(--accent);
+        }
+        
+        .tab-content {
+            padding: 2rem;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Sections in Modal */
+        .section {
+            margin-bottom: 2rem;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section h3 {
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        
+        .section p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        .section ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        .section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .section li strong {
+            color: var(--text);
+        }
+        
+        .contribution-box {
+            background-color: rgba(179, 0, 0, 0.1);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .contribution-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background-color: var(--border);
+            margin: 6rem 0;
+            opacity: 0.5;
+        }
+        
+        .simple-card {
+            background-color: var(--card);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .simple-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .simple-card p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .col-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .project-detail-content {
+                margin: 1rem;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1 0 auto;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Student Projects Portal</h1>
+        <div class="accent-bar"></div>
+        <p>Collaborative projects at the intersection of technology and creativity</p>
+    </header>
+    
+    <section>
+        <h2>Current Projects</h2>
+        <p>Explore our innovative student projects that welcome diverse creative perspectives</p>
+        
+        <div class="grid">
+            <!-- Ai-Levator -->
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>Ai-Levator</h3>
+                    <small>Elevator Experience Design</small>
+                </div>
+                <div class="card-body">
+                    <div class="project-meta">
+                        <div><i>👥</i> 3 Members</div>
+                        <div><i>📅</i> Fall 2024</div>
+                    </div>
+                    <p>A smart system designed to improve elevator experiences in high-rise buildings, featuring intuitive <span class="highlight">user interfaces</span> and <span class="highlight">visual cues</span> that transform how people navigate vertical spaces.</p>
+                    <div class="tags">
+                        <span class="tag">Smart Systems</span>
+                        <span class="tag visual">UI/UX Design</span>
+                        <span class="tag visual">Motion Graphics</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#project-ai-levator" class="btn project-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Fallacy Hunter -->
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>Fallacy Hunter</h3>
+                    <small>Logical Fallacy Detection Tool</small>
+                </div>
+                <div class="card-body">
+                    <div class="project-meta">
+                        <div><i>👥</i> 3 Members</div>
+                        <div><i>📅</i> Fall 2024</div>
+                    </div>
+                    <p>A browser extension that identifies logical fallacies through <span class="highlight">intuitive visual cues</span> and <span class="highlight">illustrated examples</span> that transform abstract concepts into digestible visual content.</p>
+                    <div class="tags">
+                        <span class="tag">Educational Tools</span>
+                        <span class="tag visual">Illustration</span>
+                        <span class="tag visual">Information Design</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#project-fallacy-hunter" class="btn project-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Procrastination Coach -->
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>Procrastination Coach</h3>
+                    <small>Anti-Procrastination App</small>
+                </div>
+                <div class="card-body">
+                    <div class="project-meta">
+                        <div><i>👥</i> 2 Members</div>
+                        <div><i>📅</i> Fall 2024</div>
+                    </div>
+                    <p>A mobile app designed to overcome procrastination through <span class="highlight">engaging visuals</span> and <span class="highlight">gamified experiences</span> that make productivity feel rewarding instead of burdensome.</p>
+                    <div class="tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag visual">UI Design</span>
+                        <span class="tag visual">Gamification</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#project-procrastination-coach" class="btn project-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Th-Ai-Immersion -->
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>Th-Ai-Immersion</h3>
+                    <small>AI Environmental Impressionism</small>
+                </div>
+                <div class="card-body">
+                    <div class="project-meta">
+                        <div><i>👥</i> 2 Members</div>
+                        <div><i>📅</i> Fall 2024</div>
+                    </div>
+                    <p>An immersive installation that transforms environments into dynamic <span class="highlight">impressionistic visuals</span> with <span class="highlight">storyboarded sequences</span> and artistic interpretations that evoke emotional responses.</p>
+                    <div class="tags">
+                        <span class="tag">Immersive Experiences</span>
+                        <span class="tag visual">Digital Art</span>
+                        <span class="tag visual">Storyboarding</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#project-thai-immersion" class="btn project-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Thai Coast Mapping -->
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>Thai Coast Mapping</h3>
+                    <small>Coastal Visualization System</small>
+                </div>
+                <div class="card-body">
+                    <div class="project-meta">
+                        <div><i>👥</i> 2 Members</div>
+                        <div><i>📅</i> Fall 2024</div>
+                    </div>
+                    <p>A platform showcasing Thailand's coastlines through <span class="highlight">immersive visual storytelling</span>, <span class="highlight">storyboarded user journeys</span>, and interface design that highlights natural beauty.</p>
+                    <div class="tags">
+                        <span class="tag">Interactive Media</span>
+                        <span class="tag visual">Photographic Direction</span>
+                        <span class="tag visual">Storyboarding</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#project-thai-coast" class="btn project-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- My Happy Thai neighborhood -->
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>My Happy Thai Neighborhood</h3>
+                    <small>Anti-Scam Education Webtoon</small>
+                </div>
+                <div class="card-body">
+                    <div class="project-meta">
+                        <div><i>👥</i> TBD</div>
+                        <div><i>📅</i> Fall 2024</div>
+                    </div>
+                    <p>A webtoon game educating about scams through <span class="highlight">character design</span>, <span class="highlight">storyboard development</span>, and <span class="highlight">sequential art</span> that makes learning about safety engaging.</p>
+                    <div class="tags">
+                        <span class="tag">Educational Game</span>
+                        <span class="tag visual">Character Design</span>
+                        <span class="tag visual">Storyboarding</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#project-happy-thai" class="btn project-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="highlight-section" style="max-width: 1200px; margin: 2rem auto;">
+        <h3>Visual Storytelling Needs</h3>
+        <p>Our projects are seeking creative collaborators who can elevate concepts through visual communication. We're particularly interested in finding collaborators skilled in:</p>
+        
+        <div class="col-2">
+            <div>
+                <ul>
+                    <li><strong>UI/UX Design:</strong> Creating intuitive interfaces that guide users</li>
+                    <li><strong>Illustration:</strong> Developing visual assets that explain complex concepts</li>
+                    <li><strong>Storyboarding:</strong> Planning visual sequences for interactive experiences</li>
+                    <li><strong>Character Design:</strong> Creating relatable figures for narrative-driven projects</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li><strong>Visual Communication:</strong> Translating ideas into clear visual language</li>
+                    <li><strong>Motion Design:</strong> Creating animations that enhance user experience</li>
+                    <li><strong>Information Design:</strong> Organizing complex information visually</li>
+                    <li><strong>Digital Art:</strong> Bringing unique visual styles to digital applications</li>
+                </ul>
+            </div>
+        </div>
+        
+        <p>Each project presents unique opportunities to apply your creative skills to real-world challenges while building your portfolio with meaningful work.</p>
+    </div>
+    
+    <section style="text-align: center; padding-bottom: 1rem;">
+        <div class="simple-card" style="max-width: 500px; margin: 0 auto;">
+            <h3>Contact Information</h3>
+            <p><strong>Program Advisor:</strong> Lorenzo Avi</p>
+            <p><strong>Email:</strong> lorenzo@cmkl.ac.th , tthwe@cmkl.ac.th, kwai@cmkl.c.th</p>
+            <p><strong>Office:</strong> CMKL University</p>
+        </div>
+    </section>
+    
+    <!-- Project Detail Modals -->
+    <!-- Project Detail - Ai-Levator -->
+    <div id="project-ai-levator" class="project-detail">
+        <div class="project-detail-content">
+            <button class="close-btn">&times;</button>
+            <div class="project-detail-header">
+                <h2 class="project-detail-title">Ai-Levator</h2>
+                <p class="project-detail-subtitle">Elevator Experience Design</p>
+            </div>
+            <div class="tabs">
+                <div class="tab active" data-tab="overview-1">Overview</div>
+                <div class="tab" data-tab="approach-1">Visual Approach</div>
+                <div class="tab" data-tab="deliverables-1">Deliverables</div>
+                <div class="tab" data-tab="team-1">Team</div>
+            </div>
+            <div class="project-detail-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview-1">
+                        <div class="section">
+                            <h3>Project Vision</h3>
+                            <p>Ai-Levator reimagines the elevator experience through intuitive design and visual communication. The project aims to create a system that not only reduces wait times but transforms how people interact with vertical transportation in buildings.</p>
+                            <p>The core of this project is creating visual interfaces that make complex systems feel simple and intuitive for users. By combining smart technology with thoughtful design, we're aiming to create elevator experiences that are efficient, accessible, and even enjoyable.</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Key Beneficiaries</h3>
+                            <ul>
+                                <li><strong>Building Occupants:</strong> Employees and residents who use elevators daily</li>
+                                <li><strong>Visitors:</strong> People unfamiliar with the building who need clear guidance</li>
+                                <li><strong>People with Accessibility Needs:</strong> Those who require inclusive design considerations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Visual Design Opportunities</h4>
+                            <ul>
+                                <li>Creating an intuitive interface system for elevator controls</li>
+                                <li>Designing visual guidance cues for elevator lobbies</li>
+                                <li>Developing motion graphics for interactive displays</li>
+                                <li>Creating storyboards for user flow sequences</li>
+                                <li>Designing a visual language that works across digital and physical touchpoints</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="approach-1">
+                        <div class="section">
+                            <h3>Visual Communication Strategy</h3>
+                            <p>The Ai-Levator project focuses on creating visual systems that make complex elevator routing accessible to all users. Our approach emphasizes:</p>
+                            <ul>
+                                <li><strong>Visual Hierarchy:</strong> Using size, color, and placement to prioritize information</li>
+                                <li><strong>Motion Design:</strong> Creating animations that indicate system status and direction</li>
+                                <li><strong>Consistent Visual Language:</strong> Developing a cohesive design system across all touchpoints</li>
+                                <li><strong>Inclusive Design:</strong> Ensuring the system works for users with varying abilities</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Design Focus Areas</h3>
+                            <ul>
+                                <li><strong>Control Panel Interface:</strong> Reimagining how users select floors and understand system status</li>
+                                <li><strong>Lobby Displays:</strong> Creating informative visuals that guide users to the right elevator</li>
+                                <li><strong>Mobile Integration:</strong> Designing a companion app interface that connects with the building system</li>
+                                <li><strong>Status Indicators:</strong> Developing visual cues that show elevator location and status</li>
+                                <li><strong>Experience Storyboarding:</strong> Planning the complete user journey through visual sequences</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Creative Challenges</h4>
+                            <ul>
+                                <li>How might we use visual design to make waiting times feel shorter?</li>
+                                <li>What visual cues can efficiently guide users to their assigned elevator?</li>
+                                <li>How can we create intuitive interfaces that require minimal learning?</li>
+                                <li>What animation principles could help users understand elevator movement?</li>
+                                <li>How might we storyboard the ideal elevator experience from entry to exit?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="deliverables-1">
+                        <div class="section">
+                            <h3>Expected Outputs</h3>
+                            <p>The Ai-Levator project will create several key deliverables focused on the visual and experiential aspects of elevator systems:</p>
+                            <ul>
+                                <li><strong>Interface Designs:</strong> Visual mockups for control panels and digital displays</li>
+                                <li><strong>Experience Storyboards:</strong> Visual sequences showing user journeys through the system</li>
+                                <li><strong>Motion Prototypes:</strong> Animated demonstrations of key interactions</li>
+                                <li><strong>Visual System Guidelines:</strong> Design specifications for colors, typography, and iconography</li>
+                                <li><strong>Mobile App Interface:</strong> Design for a companion application</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Visual Components</h3>
+                            <ul>
+                                <li><strong>Iconography Set:</strong> Custom icons to represent system functions and status</li>
+                                <li><strong>Color System:</strong> Accessible color palette for interfaces and signage</li>
+                                <li><strong>Animation Library:</strong> Motion patterns for different system states</li>
+                                <li><strong>Wayfinding Elements:</strong> Visual cues to guide users through the space</li>
+                                <li><strong>Digital and Physical Integration:</strong> Design specifications for how digital interfaces connect with physical elements</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Design Opportunities</h4>
+                            <p>Creative team members will have the chance to develop:</p>
+                            <ul>
+                                <li>Comprehensive interface mockups for multiple touchpoints</li>
+                                <li>Animated prototypes demonstrating key interactions</li>
+                                <li>Storyboards illustrating the complete user journey</li>
+                                <li>Visual identity elements that create a cohesive system</li>
+                                <li>Presentation materials that effectively communicate design concepts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="team-1">
+                        <div class="section">
+                            <h3>Current Team Members</h3>
+                            <ul>
+                                <li><strong>Thiri Htet Thwe:</strong> Project Coordinator</li>
+                                <li><strong>Khant Phyo Wai:</strong> 3D Simulation Engineer, Project Manager</li>
+                                <li><strong>Phyo Theingi:</strong> Machine Learning Engineer</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Advisor</h3>
+                            <p>Lorenzo Avi</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>We're Looking For</h3>
+                            <ul>
+                                <li><strong>UI/UX Designers:</strong> To create intuitive interfaces for elevator systems</li>
+                                <li><strong>Motion Designers:</strong> To develop animations that communicate system status</li>
+                                <li><strong>Visual Designers:</strong> To establish a cohesive visual language</li>
+                                <li><strong>Storyboard Artists:</strong> To map user journeys through visual sequences</li>
+                                <li><strong>Interaction Designers:</strong> To conceptualize how users engage with the system</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Ideal Team Member</h4>
+                            <p>We're looking for creative individuals who:</p>
+                            <ul>
+                                <li>Are passionate about creating intuitive visual systems</li>
+                                <li>Enjoy translating complex information into clear visuals</li>
+                                <li>Have experience or interest in interface design</li>
+                                <li>Can think through user experiences visually</li>
+                                <li>Want to create portfolio pieces with real-world application</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Project Detail - Fallacy Hunter -->
+    <div id="project-fallacy-hunter" class="project-detail">
+        <div class="project-detail-content">
+            <button class="close-btn">&times;</button>
+            <div class="project-detail-header">
+                <h2 class="project-detail-title">Fallacy Hunter</h2>
+                <p class="project-detail-subtitle">Logical Fallacy Detection Tool</p>
+            </div>
+            <div class="tabs">
+                <div class="tab active" data-tab="overview-2">Overview</div>
+                <div class="tab" data-tab="approach-2">Visual Approach</div>
+                <div class="tab" data-tab="deliverables-2">Deliverables</div>
+                <div class="tab" data-tab="team-2">Team</div>
+            </div>
+            <div class="project-detail-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview-2">
+                        <div class="section">
+                            <h3>Project Vision</h3>
+                            <p>Fallacy Hunter transforms how people identify logical fallacies by making abstract concepts visually concrete. This browser extension helps users recognize flawed reasoning through intuitive visual cues and illustrated examples.</p>
+                            <p>Our goal is to create a tool that makes critical thinking skills more accessible through strong visual communication, helping users identify reasoning errors and strengthen their own arguments.</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Key Beneficiaries</h3>
+                            <ul>
+                                <li><strong>Students:</strong> Learning critical thinking and argumentation</li>
+                                <li><strong>Educators:</strong> Teaching logical reasoning in engaging ways</li>
+                                <li><strong>Writers:</strong> Improving the quality of their arguments</li>
+                                <li><strong>General Public:</strong> Evaluating information more critically</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Visual Storytelling Opportunities</h4>
+                            <ul>
+                                <li>Creating visual metaphors that explain abstract fallacy concepts</li>
+                                <li>Designing character-driven scenarios that illustrate fallacies in action</li>
+                                <li>Developing iconography that represents different fallacy types</li>
+                                <li>Creating storyboards for educational examples</li>
+                                <li>Designing visual explanations that break down complex concepts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="approach-2">
+                        <div class="section">
+                            <h3>Visual Communication Strategy</h3>
+                            <p>The Fallacy Hunter project tackles the challenge of making abstract logical concepts visually engaging through:</p>
+                            <ul>
+                                <li><strong>Visual Metaphors:</strong> Creating imagery that represents abstract concepts</li>
+                                <li><strong>Character-Based Scenarios:</strong> Developing relatable examples through illustrated stories</li>
+                                <li><strong>Information Design:</strong> Organizing complex information into digestible visuals</li>
+                                <li><strong>Iconography:</strong> Creating a consistent system of symbols for different fallacies</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Design Focus Areas</h3>
+                            <ul>
+                                <li><strong>Fallacy Visualization:</strong> Creating visual representations of abstract concepts</li>
+                                <li><strong>User Interface:</strong> Designing how users interact with the extension</li>
+                                <li><strong>Educational Illustrations:</strong> Developing explanatory visuals for each fallacy</li>
+                                <li><strong>Storyboarded Examples:</strong> Creating sequential visuals that show fallacies in context</li>
+                                <li><strong>Visual Highlighting:</strong> Designing how fallacies appear within text</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Creative Challenges</h4>
+                            <ul>
+                                <li>How might we visually represent abstract logical concepts?</li>
+                                <li>What visual metaphors could help explain different fallacy types?</li>
+                                <li>How can we create character-driven scenarios that illustrate fallacies clearly?</li>
+                                <li>What visual language would make fallacy identification intuitive?</li>
+                                <li>How might we storyboard educational examples that resonate with users?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="deliverables-2">
+                        <div class="section">
+                            <h3>Expected Outputs</h3>
+                            <p>The Fallacy Hunter project will create several key deliverables focused on visual education:</p>
+                            <ul>
+                                <li><strong>Fallacy Illustrations:</strong> Visual explanations for each logical fallacy</li>
+                                <li><strong>Icon Set:</strong> Distinctive symbols representing different fallacy types</li>
+                                <li><strong>Extension Interface:</strong> Visual design for the browser tool</li>
+                                <li><strong>Character Library:</strong> Consistent characters used in educational examples</li>
+                                <li><strong>Storyboarded Scenarios:</strong> Sequential illustrations showing fallacies in context</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Visual Components</h3>
+                            <ul>
+                                <li><strong>Educational Cards:</strong> Visual explanations that appear when fallacies are detected</li>
+                                <li><strong>Highlighting System:</strong> Visual indicators that mark fallacies in text</li>
+                                <li><strong>Onboarding Visuals:</strong> Tutorial illustrations for new users</li>
+                                <li><strong>Fallacy Guide:</strong> Complete visual library of fallacy types and examples</li>
+                                <li><strong>Visual Style Guide:</strong> Consistent design specifications for all components</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Design Opportunities</h4>
+                            <p>Creative team members will have the chance to develop:</p>
+                            <ul>
+                                <li>Original illustrations explaining complex concepts</li>
+                                <li>Character designs for educational scenarios</li>
+                                <li>Storyboards that show fallacies in context</li>
+                                <li>Interface designs for the browser extension</li>
+                                <li>Visual educational materials that make logical concepts accessible</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="team-2">
+                        <div class="section">
+                            <h3>Current Team</h3>
+                            <li><strong>Thiri Htet Thwe:</strong> Project Coordinator</li>
+                            <li><strong>Khant Phyo Wai:</strong> Project Manager</li>
+                            <li><strong>Shin Thant Khin:</strong> Machine Learning Engineer</li>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Advisor</h3>
+                            <p>Lorenzo Avi</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>We're Looking For</h3>
+                            <ul>
+                                <li><strong>Illustrators:</strong> To create engaging explanatory visuals</li>
+                                <li><strong>Character Designers:</strong> To develop consistent characters for examples</li>
+                                <li><strong>Storyboard Artists:</strong> To create sequential educational visuals</li>
+                                <li><strong>UI/UX Designers:</strong> To design the browser extension interface</li>
+                                <li><strong>Information Designers:</strong> To organize complex information visually</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Ideal Team Member</h4>
+                            <p>We're looking for creative individuals who:</p>
+                            <ul>
+                                <li>Enjoy making complex ideas visually accessible</li>
+                                <li>Have illustration or design skills</li>
+                                <li>Are interested in education and critical thinking</li>
+                                <li>Can develop consistent visual styles</li>
+                                <li>Want to build a portfolio with educational design work</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Project Detail - Procrastination Coach -->
+    <div id="project-procrastination-coach" class="project-detail">
+        <div class="project-detail-content">
+            <button class="close-btn">&times;</button>
+            <div class="project-detail-header">
+                <h2 class="project-detail-title">Procrastination Coach</h2>
+                <p class="project-detail-subtitle">Anti-Procrastination App</p>
+            </div>
+            <div class="tabs">
+                <div class="tab active" data-tab="overview-3">Overview</div>
+                <div class="tab" data-tab="approach-3">Visual Approach</div>
+                <div class="tab" data-tab="deliverables-3">Deliverables</div>
+                <div class="tab" data-tab="team-3">Team</div>
+            </div>
+            <div class="project-detail-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview-3">
+                        <div class="section">
+                            <h3>Project Vision</h3>
+                            <p>Procrastination Coach transforms the productivity app experience through engaging visuals and gamification. Unlike guilt-inducing productivity tools, our app creates a positive, visually rewarding journey from procrastination to accomplishment.</p>
+                            <p>Our goal is to create an app that's not only functional but visually compelling, making productivity feel like a natural and rewarding choice rather than a chore.</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Key Beneficiaries</h3>
+                            <ul>
+                                <li><strong>Students:</strong> Balancing academic responsibilities</li>
+                                <li><strong>Young Professionals:</strong> Managing work-life productivity</li>
+                                <li><strong>Creative Workers:</strong> Maintaining focus on projects</li>
+                                <li><strong>Anyone with Smartphone Habits:</strong> Seeking healthier digital routines</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Visual Design Opportunities</h4>
+                            <ul>
+                                <li>Creating a visually appealing interface that motivates without inducing guilt</li>
+                                <li>Designing progression systems that visually represent productivity achievements</li>
+                                <li>Developing character or environment designs for the gamification system</li>
+                                <li>Creating storyboards for user onboarding and key features</li>
+                                <li>Designing visual reward systems that celebrate progress</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="approach-3">
+                        <div class="section">
+                            <h3>Visual Communication Strategy</h3>
+                            <p>The Procrastination Coach project creates a visually engaging approach to productivity through:</p>
+                            <ul>
+                                <li><strong>Positive Visual Language:</strong> Using design to encourage rather than shame</li>
+                                <li><strong>Progression Visualization:</strong> Creating compelling visual representations of progress</li>
+                                <li><strong>Reward Design:</strong> Developing visually satisfying achievements and milestones</li>
+                                <li><strong>Character Development:</strong> Creating relatable figures that guide the experience</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Design Focus Areas</h3>
+                            <ul>
+                                <li><strong>App Interface:</strong> Creating a visually appealing, intuitive experience</li>
+                                <li><strong>Visual Feedback:</strong> Designing how the app responds to user actions</li>
+                                <li><strong>Progress Visualization:</strong> Representing productivity in engaging visual forms</li>
+                                <li><strong>Character Design:</strong> Developing personalities that guide users through the app</li>
+                                <li><strong>Storyboarded User Flows:</strong> Planning key interactions through visual sequences</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Creative Challenges</h4>
+                            <ul>
+                                <li>How might we visualize productivity in ways that feel rewarding?</li>
+                                <li>What visual progression systems could maintain user engagement?</li>
+                                <li>How can we create characters that motivate without being annoying?</li>
+                                <li>What visual language would make productivity feel like play?</li>
+                                <li>How might we storyboard key moments in the user journey?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="deliverables-3">
+                        <div class="section">
+                            <h3>Expected Outputs</h3>
+                            <p>The Procrastination Coach project will create several key deliverables focused on visual motivation:</p>
+                            <ul>
+                                <li><strong>UI Design System:</strong> Complete interface designs for the mobile app</li>
+                                <li><strong>Visual Progress System:</strong> Designs for tracking and representing achievements</li>
+                                <li><strong>Character Assets:</strong> Visual elements that personify aspects of the app</li>
+                                <li><strong>Animation Concepts:</strong> Key motion elements that bring the interface to life</li>
+                                <li><strong>Storyboarded User Journeys:</strong> Visual sequences showing how users interact with features</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Visual Components</h3>
+                            <ul>
+                                <li><strong>Onboarding Screens:</strong> Visually engaging introduction to the app</li>
+                                <li><strong>Dashboard Design:</strong> Central interface showing progress and activities</li>
+                                <li><strong>Reward Visualizations:</strong> Visual elements that celebrate achievements</li>
+                                <li><strong>Notification Design:</strong> Visual system for reminders and updates</li>
+                                <li><strong>Visual Style Guide:</strong> Consistent design specifications for all components</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Design Opportunities</h4>
+                            <p>Creative team members will have the chance to develop:</p>
+                            <ul>
+                                <li>Comprehensive UI designs for a mobile application</li>
+                                <li>Character or mascot designs for the app's personality</li>
+                                <li>Visual progression systems that make productivity engaging</li>
+                                <li>Storyboards for key user flows and interactions</li>
+                                <li>Animation concepts for interface elements</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="team-3">
+                        <div class="section">
+                            <h3>Current Team Members</h3>
+                            <ul>
+                                <p>We're in the process of forming our team and looking for creative contributors.</p>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Advisor</h3>
+                            <p>Lorenzo Avi</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>We're Looking For</h3>
+                            <ul>
+                                <li><strong>UI/UX Designers:</strong> To create engaging mobile interfaces</li>
+                                <li><strong>Visual Designers:</strong> To develop the app's visual language</li>
+                                <li><strong>Character Designers:</strong> To create personality for the app</li>
+                                <li><strong>Storyboard Artists:</strong> To plan key user interactions</li>
+                                <li><strong>Motion Designers:</strong> To conceptualize interface animations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Ideal Team Member</h4>
+                            <p>We're looking for creative individuals who:</p>
+                            <ul>
+                                <li>Are passionate about creating engaging mobile experiences</li>
+                                <li>Understand how visual design can influence behavior</li>
+                                <li>Have experience or interest in gamification</li>
+                                <li>Can think through user experiences visually</li>
+                                <li>Want to create app designs for their portfolio</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Project Detail - Th-Ai-Immersion -->
+    <div id="project-thai-immersion" class="project-detail">
+        <div class="project-detail-content">
+            <button class="close-btn">&times;</button>
+            <div class="project-detail-header">
+                <h2 class="project-detail-title">Th-Ai-Immersion</h2>
+                <p class="project-detail-subtitle">AI Environmental Impressionism</p>
+            </div>
+            <div class="tabs">
+                <div class="tab active" data-tab="overview-4">Overview</div>
+                <div class="tab" data-tab="approach-4">Visual Approach</div>
+                <div class="tab" data-tab="deliverables-4">Deliverables</div>
+                <div class="tab" data-tab="team-4">Team</div>
+            </div>
+            <div class="project-detail-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview-4">
+                        <div class="section">
+                            <h3>Project Vision</h3>
+                            <p>Th-Ai-Immersion transforms ordinary environments into emotionally resonant visual experiences. This project uses AI to create dynamic impressionistic renditions of real-world locations, focusing on evoking emotional responses through artistic interpretation.</p>
+                            <p>Our goal is to create immersive experiences that capture the emotional essence of spaces like Thai markets or concert venues in ways that conventional photography or video cannot, using visual artistry to enhance perception.</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Key Beneficiaries</h3>
+                            <ul>
+                                <li><strong>Gallery Visitors:</strong> Experiencing immersive digital art</li>
+                                <li><strong>Cultural Enthusiasts:</strong> Exploring environments through artistic lenses</li>
+                                <li><strong>Artists:</strong> Gaining new tools for creative expression</li>
+                                <li><strong>Event Organizers:</strong> Creating memorable experiential environments</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Visual Creation Opportunities</h4>
+                            <ul>
+                                <li>Developing visual artistic styles for different emotional responses</li>
+                                <li>Creating storyboards for immersive experience sequences</li>
+                                <li>Designing environmental installations that blend digital and physical elements</li>
+                                <li>Developing visual concepts for how spaces transform through AI interpretation</li>
+                                <li>Creating mood boards and visual direction for different environments</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="approach-4">
+                        <div class="section">
+                            <h3>Visual Direction Strategy</h3>
+                            <p>The Th-Ai-Immersion project creates emotionally resonant environments through:</p>
+                            <ul>
+                                <li><strong>Artistic Style Development:</strong> Creating visual approaches for different emotions</li>
+                                <li><strong>Environmental Storyboarding:</strong> Planning how spaces transform over time</li>
+                                <li><strong>Sensory Translation:</strong> Converting multisensory experiences into visual elements</li>
+                                <li><strong>Visual Narrative:</strong> Creating sequential experiences with emotional arcs</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Design Focus Areas</h3>
+                            <ul>
+                                <li><strong>Visual Style Libraries:</strong> Developing artistic approaches for different environments</li>
+                                <li><strong>Environment Design:</strong> Creating concepts for how physical spaces are transformed</li>
+                                <li><strong>Experience Storyboards:</strong> Planning the visual journey through sequences</li>
+                                <li><strong>Emotional Color Theory:</strong> Developing color palettes tied to emotional states</li>
+                                <li><strong>Installation Concepts:</strong> Designing how digital elements integrate with spaces</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Creative Challenges</h4>
+                            <ul>
+                                <li>How might we translate emotional experiences into visual styles?</li>
+                                <li>What visual sequences could create the most immersive experiences?</li>
+                                <li>How can we storyboard transitions between different emotional states?</li>
+                                <li>What visual elements would enhance rather than distract from environments?</li>
+                                <li>How might we develop visual styles that complement AI-generated content?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="deliverables-4">
+                        <div class="section">
+                            <h3>Expected Outputs</h3>
+                            <p>The Th-Ai-Immersion project will create several key deliverables focused on visual experiences:</p>
+                            <ul>
+                                <li><strong>Visual Style Guide:</strong> Artistic approaches for different environments</li>
+                                <li><strong>Experience Storyboards:</strong> Sequential plans for immersive journeys</li>
+                                <li><strong>Environmental Concepts:</strong> Designs for how spaces are transformed</li>
+                                <li><strong>Installation Visualizations:</strong> Concepts showing how the experience works in space</li>
+                                <li><strong>Presentation Materials:</strong> Visual assets for the Bangkok AI Summit</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Visual Components</h3>
+                            <ul>
+                                <li><strong>Mood Boards:</strong> Visual references for different emotional states</li>
+                                <li><strong>Style Frames:</strong> Key visual moments in the experience</li>
+                                <li><strong>Transition Storyboards:</strong> Visual sequences showing how environments change</li>
+                                <li><strong>Environment Renders:</strong> Visualizations of transformed spaces</li>
+                                <li><strong>Installation Diagrams:</strong> Technical plans for physical implementation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Design Opportunities</h4>
+                            <p>Creative team members will have the chance to develop:</p>
+                            <ul>
+                                <li>Artistic style explorations for different environments</li>
+                                <li>Comprehensive storyboards for immersive experiences</li>
+                                <li>Environmental design concepts that blend digital and physical</li>
+                                <li>Visual presentations for exhibition purposes</li>
+                                <li>Conceptual renders of transformed spaces</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="team-4">
+                        <div class="section">
+                            <h3>Current Team Members</h3>
+                            <ul>
+                                <li><strong>Khant Phyo Wai:</strong> Project Manager</li>
+                                <li><strong>Aung Sett Paing:</strong> Visual Interaction Designer</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Advisor</h3>
+                            <p>Lorenzo Avi</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>We're Looking For</h3>
+                            <ul>
+                                <li><strong>Digital Artists:</strong> To develop visual styles and artistic approaches</li>
+                                <li><strong>Environmental Designers:</strong> To conceptualize transformed spaces</li>
+                                <li><strong>Storyboard Artists:</strong> To plan immersive experience sequences</li>
+                                <li><strong>Color Theorists:</strong> To develop emotional color palettes</li>
+                                <li><strong>Concept Artists:</strong> To visualize installation possibilities</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Ideal Team Member</h4>
+                            <p>We're looking for creative individuals who:</p>
+                            <ul>
+                                <li>Have a strong visual art or design background</li>
+                                <li>Are interested in the intersection of art and technology</li>
+                                <li>Enjoy thinking about how environments affect emotions</li>
+                                <li>Can develop visual concepts and storyboards</li>
+                                <li>Want to create portfolio pieces related to immersive experiences</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Project Detail - Thai Coast Mapping -->
+    <div id="project-thai-coast" class="project-detail">
+        <div class="project-detail-content">
+            <button class="close-btn">&times;</button>
+            <div class="project-detail-header">
+                <h2 class="project-detail-title">Thai Coast Mapping</h2>
+                <p class="project-detail-subtitle">Coastal Visualization System</p>
+            </div>
+            <div class="tabs">
+                <div class="tab active" data-tab="overview-5">Overview</div>
+                <div class="tab" data-tab="approach-5">Visual Approach</div>
+                <div class="tab" data-tab="deliverables-5">Deliverables</div>
+                <div class="tab" data-tab="team-5">Team</div>
+            </div>
+            <div class="project-detail-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview-5">
+                        <div class="section">
+                            <h3>Project Vision</h3>
+                            <p>Thai Coast Mapping creates an immersive visual experience of Thailand's coastlines. This project utilizes photography, interface design, and visual storytelling to showcase coastal areas from perspectives not available through traditional mapping services.</p>
+                            <p>Our goal is to create a platform that transforms how people experience coastal regions, using compelling visual design to highlight the unique beauty and character of Thailand's shores.</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Key Beneficiaries</h3>
+                            <ul>
+                                <li><strong>Tourists:</strong> Exploring potential destinations visually</li>
+                                <li><strong>Property Seekers:</strong> Viewing coastal properties from new angles</li>
+                                <li><strong>Tourism Industry:</strong> Showcasing Thailand's coastal beauty</li>
+                                <li><strong>Conservation Groups:</strong> Documenting coastal environments</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Visual Design Opportunities</h4>
+                            <ul>
+                                <li>Creating an intuitive interface for navigating coastal imagery</li>
+                                <li>Developing storyboards for user journeys through the platform</li>
+                                <li>Designing visual navigation systems that enhance exploration</li>
+                                <li>Creating photographic direction guides for content capture</li>
+                                <li>Developing visual storytelling approaches for different coastal regions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="approach-5">
+                        <div class="section">
+                            <h3>Visual Communication Strategy</h3>
+                            <p>The Thai Coast Mapping project creates compelling coastal visualizations through:</p>
+                            <ul>
+                                <li><strong>Visual Navigation Design:</strong> Creating intuitive ways to explore coastlines</li>
+                                <li><strong>Photographic Direction:</strong> Establishing visual guidelines for capturing coastal views</li>
+                                <li><strong>Sequential Storytelling:</strong> Developing visual narratives for coastal journeys</li>
+                                <li><strong>Interface Design:</strong> Creating engaging ways to interact with visual content</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Design Focus Areas</h3>
+                            <ul>
+                                <li><strong>Platform Interface:</strong> Creating a visually engaging system for exploration</li>
+                                <li><strong>Visual Navigation:</strong> Designing how users move through coastal content</li>
+                                <li><strong>Photographic Style Guide:</strong> Establishing consistent visual approaches to coastal capture</li>
+                                <li><strong>Journey Storyboards:</strong> Planning how users experience coastal narratives</li>
+                                <li><strong>Visual Informational Overlays:</strong> Designing how additional data integrates with imagery</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Creative Challenges</h4>
+                            <ul>
+                                <li>How might we design an interface that highlights natural beauty?</li>
+                                <li>What visual navigation systems could enhance coastal exploration?</li>
+                                <li>How can we storyboard virtual journeys along the coast?</li>
+                                <li>What photographic approaches would best capture coastal character?</li>
+                                <li>How might we integrate informational elements without disrupting visual immersion?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="deliverables-5">
+                        <div class="section">
+                            <h3>Expected Outputs</h3>
+                            <p>The Thai Coast Mapping project will create several key deliverables focused on visual exploration:</p>
+                            <ul>
+                                <li><strong>Platform Interface Design:</strong> Visual system for the web/mobile application</li>
+                                <li><strong>Journey Storyboards:</strong> Visual sequences showing coastal exploration</li>
+                                <li><strong>Photography Direction Guide:</strong> Visual standards for coastal imagery</li>
+                                <li><strong>Navigation System Design:</strong> Visual elements for moving through content</li>
+                                <li><strong>Information Design System:</strong> Visual approach to integrating coastal data</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Visual Components</h3>
+                            <ul>
+                                <li><strong>UI Mockups:</strong> Visual designs for the platform interface</li>
+                                <li><strong>Interactive Prototypes:</strong> Functional demonstrations of key features</li>
+                                <li><strong>Visual Map Systems:</strong> Designs for how coastlines are represented</li>
+                                <li><strong>Photographic Style Frames:</strong> Examples of visual approaches to coastal imagery</li>
+                                <li><strong>Journey Visualizations:</strong> Storyboarded experiences for different coasts</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Design Opportunities</h4>
+                            <p>Creative team members will have the chance to develop:</p>
+                            <ul>
+                                <li>Comprehensive interface designs for web and mobile</li>
+                                <li>Visual storyboards for coastal journeys</li>
+                                <li>Photographic direction concepts for coastal imagery</li>
+                                <li>Interactive navigation systems for spatial exploration</li>
+                                <li>Visual information design for coastal data</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="team-5">
+                        <div class="section">
+                            <h3>Current Team Members</h3>
+                            <ul>
+                                <p>We're in the process of forming our team and looking for creative contributors.</p>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Advisor</h3>
+                            <p>Lorenzo Avi</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>We're Looking For</h3>
+                            <ul>
+                                <li><strong>UI/UX Designers:</strong> To create the platform interface</li>
+                                <li><strong>Photographers:</strong> To establish visual direction for coastal imagery</li>
+                                <li><strong>Storyboard Artists:</strong> To plan coastal journey narratives</li>
+                                <li><strong>Visual Information Designers:</strong> To integrate data with imagery</li>
+                                <li><strong>Interaction Designers:</strong> To develop navigation systems</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Ideal Team Member</h4>
+                            <p>We're looking for creative individuals who:</p>
+                            <ul>
+                                <li>Have a strong sense of visual composition</li>
+                                <li>Are interested in how interface design affects exploration</li>
+                                <li>Can think sequentially about visual experiences</li>
+                                <li>Appreciate natural environments and how to showcase them</li>
+                                <li>Want to create portfolio pieces related to interactive media</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Project Detail - My Happy Thai Neighborhood -->
+    <div id="project-happy-thai" class="project-detail">
+        <div class="project-detail-content">
+            <button class="close-btn">&times;</button>
+            <div class="project-detail-header">
+                <h2 class="project-detail-title">My Happy Thai Neighborhood</h2>
+                <p class="project-detail-subtitle">Anti-Scam Education Webtoon</p>
+            </div>
+            <div class="tabs">
+                <div class="tab active" data-tab="overview-6">Overview</div>
+                <div class="tab" data-tab="approach-6">Visual Approach</div>
+                <div class="tab" data-tab="deliverables-6">Deliverables</div>
+                <div class="tab" data-tab="team-6">Team</div>
+            </div>
+            <div class="project-detail-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview-6">
+                        <div class="section">
+                            <h3>Project Vision</h3>
+                            <p>My Happy Thai Neighborhood transforms scam education through visual storytelling. This mobile webtoon uses character-driven narratives, engaging illustrations, and interactive elements to help Thai citizens recognize and avoid common scams.</p>
+                            <p>Our goal is to create a compelling visual experience that makes learning about scam prevention feel like reading an engaging story rather than studying educational material.</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Key Beneficiaries</h3>
+                            <ul>
+                                <li><strong>Young Adults (18-25):</strong> Primary target audience</li>
+                                <li><strong>Office Workers (22-35):</strong> Secondary target group</li>
+                                <li><strong>Community Organizations:</strong> Using the tool for public education</li>
+                                <li><strong>Educational Institutions:</strong> Sharing with students and faculty</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Visual Storytelling Opportunities</h4>
+                            <ul>
+                                <li>Creating character designs that resonate with Thai audiences</li>
+                                <li>Developing storyboards for webtoon episodes focused on different scams</li>
+                                <li>Designing visual environments that represent Thai neighborhoods</li>
+                                <li>Creating sequential narratives that explain scam mechanics visually</li>
+                                <li>Developing interactive visual elements that enhance learning</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="approach-6">
+                        <div class="section">
+                            <h3>Visual Storytelling Strategy</h3>
+                            <p>The My Happy Thai Neighborhood project creates engaging educational content through:</p>
+                            <ul>
+                                <li><strong>Character-Driven Narratives:</strong> Using relatable characters to explain scams</li>
+                                <li><strong>Sequential Storytelling:</strong> Breaking down scam scenarios step by step</li>
+                                <li><strong>Visual Communication:</strong> Using illustrations to explain complex concepts</li>
+                                <li><strong>Thai Cultural Context:</strong> Creating visuals that reflect local environments</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Design Focus Areas</h3>
+                            <ul>
+                                <li><strong>Character Design:</strong> Creating relatable characters for different stories</li>
+                                <li><strong>Environment Design:</strong> Developing visual settings for Thai neighborhoods</li>
+                                <li><strong>Storyboarding:</strong> Planning sequential narratives for different scam types</li>
+                                <li><strong>Visual Style Guide:</strong> Establishing consistent illustration approaches</li>
+                                <li><strong>Interactive Elements:</strong> Designing visual components that engage users</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Creative Challenges</h4>
+                            <ul>
+                                <li>How might we create characters that Thai audiences connect with?</li>
+                                <li>What visual approaches could make scam education engaging?</li>
+                                <li>How can we storyboard complex scam scenarios clearly?</li>
+                                <li>What visual style would balance entertainment with education?</li>
+                                <li>How might we represent Thai environments authentically?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="deliverables-6">
+                        <div class="section">
+                            <h3>Expected Outputs</h3>
+                            <p>The My Happy Thai Neighborhood project will create several key deliverables focused on visual education:</p>
+                            <ul>
+                                <li><strong>Character Design Library:</strong> Visual designs for recurring characters</li>
+                                <li><strong>Environment Concepts:</strong> Visual settings for different neighborhoods</li>
+                                <li><strong>Episode Storyboards:</strong> Sequential narratives for different scam types</li>
+                                <li><strong>Visual Style Guide:</strong> Consistent illustration standards</li>
+                                <li><strong>Interactive Element Designs:</strong> Visual components for game mechanics</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Visual Components</h3>
+                            <ul>
+                                <li><strong>Character Sheets:</strong> Detailed designs and expressions for each character</li>
+                                <li><strong>Environment Illustrations:</strong> Key locations in the Thai neighborhood</li>
+                                <li><strong>Episode Plans:</strong> Storyboarded sequences for different scam scenarios</li>
+                                <li><strong>UI Elements:</strong> Interface components for the mobile app</li>
+                                <li><strong>Educational Infographics:</strong> Visual explainers integrated into stories</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Design Opportunities</h4>
+                            <p>Creative team members will have the chance to develop:</p>
+                            <ul>
+                                <li>Original character designs representing Thai society</li>
+                                <li>Comprehensive storyboards for webtoon episodes</li>
+                                <li>Environmental illustrations of Thai settings</li>
+                                <li>Sequential visual narratives that educate through storytelling</li>
+                                <li>Interactive visual elements that enhance user engagement</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="team-6">
+                        <div class="section">
+                            <h3>Current Team</h3>
+                            <li><strong>Thiri Htet Thwe:</strong> Game designer,developer</li>
+                            <li><strong>Khant Phyo Wai:</strong> Project Manager</li>
+                            <li><strong>Thiri Htet Thwe:</strong> Game designer,developer</li>
+
+                        </div>
+                        
+                        <div class="section">
+                            <h3>Advisor</h3>
+                            <p>Lorenzo Avi</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>We're Looking For</h3>
+                            <ul>
+                                <li><strong>Character Designers:</strong> To create the webtoon's cast</li>
+                                <li><strong>Sequential Artists:</strong> To develop webtoon episodes</li>
+                                <li><strong>Storyboard Artists:</strong> To plan narrative sequences</li>
+                                <li><strong>Environment Artists:</strong> To create Thai neighborhood settings</li>
+                                <li><strong>UI Designers:</strong> To develop the mobile interface</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contribution-box">
+                            <h4>Ideal Team Member</h4>
+                            <p>We're looking for creative individuals who:</p>
+                            <ul>
+                                <li>Have illustration or sequential art skills</li>
+                                <li>Are interested in educational storytelling</li>
+                                <li>Can develop character-driven narratives</li>
+                                <li>Are familiar with or interested in Thai culture</li>
+                                <li>Want to create portfolio pieces in digital storytelling</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Student Projects Portal</p>
+        <p>Projects supervised by Lorenzo Avi</p>
+    </footer>
+    
+    <script>
+        // Show project detail when clicking on a project card
+        document.querySelectorAll('.project-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = btn.getAttribute('href').substring(1);
+                document.getElementById(targetId).style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close project detail
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const detailContainer = btn.closest('.project-detail');
+                detailContainer.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Get tab container
+                const tabContainer = tab.closest('.tabs');
+                const tabContent = tab.closest('.project-detail-content').querySelector('.tab-content');
+                
+                // Get tab ID
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and tab panes
+                tabContainer.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tabContent.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+                
+                // Add active class to current tab and tab pane
+                tab.classList.add('active');
+                tabContent.querySelector(`#${tabId}`).classList.add('active');
+            });
+        });
+        
+        // Close project detail when clicking outside
+        document.querySelectorAll('.project-detail').forEach(detail => {
+            detail.addEventListener('click', (e) => {
+                if (e.target === detail) {
+                    detail.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+        
+        // Initialize the page
+        window.addEventListener('DOMContentLoaded', () => {
+            // Set initial tab states
+            document.querySelectorAll('.tabs').forEach(tabContainer => {
+                const firstTab = tabContainer.querySelector('.tab');
+                if (firstTab) {
+                    const tabId = firstTab.getAttribute('data-tab');
+                    const tabContent = tabContainer.closest('.project-detail-content').querySelector('.tab-content');
+                    const firstPane = tabContent.querySelector(`#${tabId}`);
+                    if (firstPane) {
+                        firstTab.classList.add('active');
+                        firstPane.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
